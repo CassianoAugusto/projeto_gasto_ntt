@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>901612437131-l1t9u8lvv3ga4shcq16o5poe8q9pa78m.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.901612437131-l1t9u8lvv3ga4shcq16o5poe8q9pa78m</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAGd8vlYeNvH2e3vWQS1W3LKcK14MRYuO0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>901612437131</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.projetoGastoNtt</string>
+	<key>PROJECT_ID</key>
+	<string>projeto-gasto-ntt</string>
+	<key>STORAGE_BUCKET</key>
+	<string>projeto-gasto-ntt.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:901612437131:ios:5a2cf8d031117f5671de8e</string>
+</dict>
+</plist>
