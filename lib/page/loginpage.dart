@@ -1,7 +1,5 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:projeto_gasto_ntt/page/categoriaspage.dart';
+import '../servicos/autenticacao_servico.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,16 +8,12 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-bool queroEntar = true;
-
 class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final senhaController = TextEditingController();
-  final firebaseAuth = FirebaseAuth.instance;
+  AutenticacaoServico autenServico = AutenticacaoServico();
   bool versenha = false;
-
-  get child => null;
 
   @override
   Widget build(BuildContext context) {
@@ -116,15 +110,31 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: 50,
                 child: ElevatedButton(
-                    onPressed: () {
-                      botaoPrincipalClicado();
-                      // if (formKey.currentState!.validate()) {
-                      //   Navigator.pushNamedAndRemoveUntil(
-                      //     context,
-                      //     '/categorias',
-                      //         (route) => false,
-                      //   );
-                      // }
+                    onPressed: () async {
+                      String email = emailController.text;
+                      String senha = senhaController.text;
+
+                      if (formKey.currentState!.validate()) {
+                        final mensagem = await autenServico.cadastroValido(
+                          email: email,
+                          senha: senha,
+                        );
+
+                        setState(() {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(mensagem),
+                              backgroundColor: mensagem.contains("sucesso")
+                                  ? Colors.green
+                                  : Colors.red,
+                            ),
+                          );
+
+                          if (mensagem.contains("sucesso")) {
+                            Navigator.pushNamed(context, '/categorias');
+                          }
+                        });
+                      }
                     },
                     style: ButtonStyle(
                         shape:
@@ -167,53 +177,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
-
-
-
-  // login() async {
-  //   try {
-  //     UserCredential userCredential =
-  //     await firebaseAuth.signInWithEmailAndPassword(
-  //       email: emailController.text,
-  //       password: senhaController.text,
-  //     );
-  //     if (userCredential != null) {
-  //       Navigator.pushReplacement(
-  //           context,
-  //           MaterialPageRoute(
-  //             builder: (context) => const CategoriasPage(),
-  //           ));
-  //     }
-  //   } on FirebaseAuthException catch (e) {
-  //     if (e.code == 'user-not-found') {
-  //       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-  //         content: Text('Usuario não encontrado'),
-  //       ));
-  //     } else if (e.code == 'wrong-password') {
-  //       const SnackBar(content: Text('Sua senha esta errada'),);
-  //     }
-  //   }
-  // }
-
-
-
-
-
-
-
-
-  botaoPrincipalClicado() {
-    if (formKey.currentState!.validate()) {
-      if (queroEntar) {
-        print("Entrada Validada");
-      } else {
-        print("Cadastro validado");
-        print("${emailController.text},${senhaController},");
-      }
-    } else {
-      print("Form invalido");
-    }
-  }
 }
-

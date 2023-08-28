@@ -1,28 +1,37 @@
-import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:http/http.dart';
 
 class AutenticacaoServico {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-  cadastrarUsuario({
+  Future<String> cadastrarUsuario({
     required String email,
     required String senha,
-  }) {
-    firebaseAuth.createUserWithEmailAndPassword(
+  }) async {
+    try {
+      await firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: senha,
+      );
+      return "Cadastro realizado com sucesso";
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        return "O endereço de e-mail já está em uso";
+      } else {
+        return "Erro ao cadastrar usuário. Tente novamente mais tarde";
+      }
+    } catch (e) {
+      return "Erro ao cadastrar usuário. Tente novamente mais tarde";
+    }
+  }
+
+  Future<String> cadastroValido({
+    required String email,
+    required String senha,
+  }) async {
+    await firebaseAuth.signInWithEmailAndPassword(
       email: email,
       password: senha,
     );
+    return "Login com sucesso";
   }
-// Future<void> signin(String email, String senha) async{
-//   final response = await post(
-//     Uri.parse(_url),
-//     body: jsonEncode({
-//       'emeil':email,
-//       'senha':senha,
-//       'returnSecureToken':true
-//      })
-//     );
-// }
 }

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:projeto_gasto_ntt/page/loginpage.dart';
 import 'package:projeto_gasto_ntt/servicos/autenticacao_servico.dart';
 // Import the generated file
 
@@ -11,13 +9,11 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-bool queroEntar = true;
-
 class _RegisterPageState extends State<RegisterPage> {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final senhaController = TextEditingController();
-  final nome = TextEditingController();
+  final confirmaSenhaController = TextEditingController();
   AutenticacaoServico autenServico = AutenticacaoServico();
 
   @override
@@ -78,6 +74,16 @@ class _RegisterPageState extends State<RegisterPage> {
                       color: const Color(0xFFfaf9f9),
                       borderRadius: BorderRadius.circular(10)),
                   child: TextFormField(
+                    validator: (String? value) {
+                      if (value == null) {
+                        return "Senha  não pode ser vazio";
+                      }
+                      if (value.length < 5) {
+                        return "Degite umas senha";
+                      }
+
+                      return null;
+                    },
                     controller: senhaController,
                     keyboardType: TextInputType.visiblePassword,
                     decoration: InputDecoration(
@@ -96,6 +102,16 @@ class _RegisterPageState extends State<RegisterPage> {
                       color: const Color(0xFFfaf9f9),
                       borderRadius: BorderRadius.circular(10)),
                   child: TextFormField(
+                    validator: (String? value) {
+                      if (value == null) {
+                        return "Senha  não pode ser vazio";
+                      }
+                      if (value.length < 5) {
+                        return "Repita sua senha";
+                      }
+
+                      return null;
+                    },
                     keyboardType: TextInputType.visiblePassword,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -103,26 +119,37 @@ class _RegisterPageState extends State<RegisterPage> {
                           borderRadius: BorderRadius.circular(10)),
                       hintText: 'Confirme sua senha',
                     ),
+                    controller: confirmaSenhaController,
                   ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     String email = emailController.text;
                     String senha = senhaController.text;
+
                     if (formKey.currentState!.validate()) {
-                      if (queroEntar) {
-                        print("Entrada Validada");
-                      } else {
-                        print("Cadastro validado");
-                        print("${emailController.text},${senhaController},");
-                        autenServico.cadastrarUsuario(
-                            email: email, senha: senha);
-                      }
-                    } else {
-                      print("Form invalido");
+                      final mensagem = await autenServico.cadastrarUsuario(
+                        email: email,
+                        senha: senha,
+                      );
+
+                      setState(() {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(mensagem),
+                            backgroundColor: mensagem.contains("sucesso")
+                                ? Colors.green
+                                : Colors.red,
+                          ),
+                        );
+
+                        if (mensagem.contains("sucesso")) {
+                          Navigator.pushNamed(context, '/login');
+                        }
+                      });
                     }
                   },
                   style: ButtonStyle(
@@ -160,20 +187,4 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
-  //
-  // botaoPrincipalClicado() {
-  //   String email = emailController.text;
-  //   String senha = senhaController.text;
-  //   if (formKey.currentState!.validate()) {
-  //     if (queroEntar) {
-  //       print("Entrada Validada");
-  //     } else {
-  //       print("Cadastro validado");
-  //       print("${emailController.text},${senhaController},");
-  //       autenServico.cadastrarUsuario(email: email, senha: senha);
-  //     }
-  //   } else {
-  //     print("Form invalido");
-  //   }
-  // }
 }
