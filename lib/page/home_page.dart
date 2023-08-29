@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:projeto_gasto_ntt/page/categoriapagelist.dart';
+import 'package:projeto_gasto_ntt/page/categoria_page_list.dart';
+import 'package:projeto_gasto_ntt/page/entry_page.dart';
 
-class CategoriasPage extends StatefulWidget {
-  const CategoriasPage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<CategoriasPage> createState() => _CategoriasPageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 final formKey = GlobalKey<FormState>();
 
+class _HomePageState extends State<HomePage> {
+  int selectedIndex = 0;
 
-class _CategoriasPageState extends State<CategoriasPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,28 +43,14 @@ class _CategoriasPageState extends State<CategoriasPage> {
           ],
         ),
       ),
-
-      body: const SingleChildScrollView(
-        padding: EdgeInsets.all(18),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Categorias',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 25,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-      CategoriaPageList(),
-          ],
-        ),
-      ),
       bottomNavigationBar: NavigationBar(
+        selectedIndex: selectedIndex,
         onDestinationSelected: (int index) {
-          setState(() {});
+          setState(() {
+            selectedIndex = index;
+          });
         },
+
         // indicatorColor:(const Color(0xff5ea3a3)),
         destinations: <Widget>[
           NavigationDestination(
@@ -70,6 +58,7 @@ class _CategoriasPageState extends State<CategoriasPage> {
               'asset/icons/entry.svg',
               width: 16,
               height: 16,
+              color: selectedIndex == 1 ? Colors.grey : Colors.green,
             ),
             label: 'Lançamentos',
           ),
@@ -78,9 +67,27 @@ class _CategoriasPageState extends State<CategoriasPage> {
               'asset/icons/category.svg',
               width: 16,
               height: 16,
+              color: selectedIndex == 0 ? Colors.grey : Colors.green,
             ),
             label: 'Categorias',
           ),
+        ],
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: Text(
+              selectedIndex == 1 ? 'Categorias' : 'Lançamentos',
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 25,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          selectedIndex == 1 ? const CategoriaPageList() : const EntryPage(),
         ],
       ),
     );

@@ -132,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                           if (mensagem.contains("sucesso")) {
                             Navigator.pushNamedAndRemoveUntil(
                               context,
-                              '/categorias',
+                              '/homepage',
                               (route) => false,
                             );
                           }
