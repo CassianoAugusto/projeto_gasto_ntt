@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:projeto_gasto_ntt/page/categoriapagelist.dart';
 
 class CategoriasPage extends StatefulWidget {
   const CategoriasPage({super.key});
@@ -8,6 +8,9 @@ class CategoriasPage extends StatefulWidget {
   @override
   State<CategoriasPage> createState() => _CategoriasPageState();
 }
+
+final formKey = GlobalKey<FormState>();
+
 
 class _CategoriasPageState extends State<CategoriasPage> {
   @override
@@ -30,22 +33,30 @@ class _CategoriasPageState extends State<CategoriasPage> {
             ),
             IconButton(
               onPressed: () {},
-              icon: const Icon(Icons.add_circle_outline),
+              icon: const Icon(
+                Icons.add_circle_outline,
+                color: (Color(0xFF5ea3a3)),
+              ),
             ),
           ],
         ),
       ),
+
       body: const SingleChildScrollView(
         padding: EdgeInsets.all(18),
-        child: Form(
-          child: Text(
-            'Categorias',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 25,
-              fontWeight: FontWeight.w600,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Categorias',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 25,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
+      CategoriaPageList(),
+          ],
         ),
       ),
       bottomNavigationBar: NavigationBar(

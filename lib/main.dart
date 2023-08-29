@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_gasto_ntt/page/categoriapagelist.dart';
 import 'package:projeto_gasto_ntt/page/categoriaspage.dart';
 import 'package:projeto_gasto_ntt/page/loginpage.dart';
 import 'package:projeto_gasto_ntt/page/registropage.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
         '/categorias': (context) => const CategoriasPage(),
+        '/categoriapagelist': (context) => const CategoriaPageList(),
       },
     );
   }

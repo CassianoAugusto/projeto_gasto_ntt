@@ -166,7 +166,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () => Navigator.pushNamed(context, '/login'),
+                  onPressed: () => Navigator.pushNamed(context, '/categoriapagelist'),
+                  // onPressed: () => Navigator.pushNamed(context, '/login'),
                   style: ButtonStyle(
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(

@@ -129,9 +129,12 @@ class _LoginPageState extends State<LoginPage> {
                                   : Colors.red,
                             ),
                           );
-
                           if (mensagem.contains("sucesso")) {
-                            Navigator.pushNamed(context, '/categorias');
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              '/categorias',
+                              (route) => false,
+                            );
                           }
                         });
                       }
