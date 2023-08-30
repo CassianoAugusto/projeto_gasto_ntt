@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () => Navigator.pushNamed(context, '/pageadicionar'),
               icon: const Icon(
                 Icons.add_circle_outline,
                 color: (Color(0xFF5ea3a3)),

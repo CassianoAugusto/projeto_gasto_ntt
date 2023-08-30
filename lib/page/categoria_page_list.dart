@@ -30,7 +30,7 @@ class _CategoriaPageListState extends State<CategoriaPageList> {
           children: [
             Flexible(
               child: GestureDetector(
-                onTap: () {},
+                onTap: () => Navigator.pushNamed(context, '/pageeditarcategoria'),
                 child: Container(
                   color: const Color(0xFF5ea3a3),
                   child: const Padding(
