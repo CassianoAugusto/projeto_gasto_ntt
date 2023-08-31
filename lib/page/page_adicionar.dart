@@ -14,7 +14,6 @@ class _PageAdicionarState extends State<PageAdicionar> {
   Widget build(BuildContext context) {
     final sizeHeight = MediaQuery.of(context).size.height;
     return SizedBox(
-      height: sizeHeight * 0.12,
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
@@ -106,7 +105,11 @@ class _PageAdicionarState extends State<PageAdicionar> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () => Navigator.pushNamed(context, '/homepage'),
+                    onPressed: () =>  Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      '/homepage',
+                          (route) => false,
+                    ),
                     style: ButtonStyle(
                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(

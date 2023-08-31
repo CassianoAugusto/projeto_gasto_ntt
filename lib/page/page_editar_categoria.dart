@@ -106,7 +106,11 @@ class _PageEditarCategoriaState extends State<PageEditarCategoria> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () => Navigator.pushNamed(context, '/homepage'),
+                    onPressed: () =>  Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      '/homepage',
+                          (route) => false,
+                    ),
                     style: ButtonStyle(
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
