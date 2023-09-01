@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:projeto_gasto_ntt/page/page_editar_categoria.dart';
 
 class CategoriaPageList extends StatefulWidget {
   const CategoriaPageList({super.key});
@@ -30,7 +31,14 @@ class _CategoriaPageListState extends State<CategoriaPageList> {
           children: [
             Flexible(
               child: GestureDetector(
-                onTap: () => Navigator.pushNamed(context, '/pageeditarcategoria'),
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    isDismissible: true,
+                    builder: (context) => const PageEditarCategoria(),
+                  );
+                },
                 child: Container(
                   color: const Color(0xFF5ea3a3),
                   child: const Padding(

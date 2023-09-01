@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:projeto_gasto_ntt/page/categoria_page_list.dart';
 import 'package:projeto_gasto_ntt/page/entry_page.dart';
+import 'package:projeto_gasto_ntt/page/page_adicionar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -34,7 +35,14 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             IconButton(
-              onPressed: () => Navigator.pushNamed(context, '/pageadicionar'),
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  isDismissible: true,
+                  builder: (context) => const PageAdicionar(),
+                );
+              },
               icon: const Icon(
                 Icons.add_circle_outline,
                 color: (Color(0xFF5ea3a3)),
