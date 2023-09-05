@@ -66,7 +66,7 @@ class _CategoriaPageListState extends State<CategoriaPageList> {
               child: GestureDetector(
                 onTap: () {},
                 child: Container(
-                  color: Colors.red,
+                  color: const Color(0xFF5ea3a3),
                   child: const Padding(
                     padding: EdgeInsets.only(right: 10.0),
                     child: Align(
@@ -89,7 +89,7 @@ class _CategoriaPageListState extends State<CategoriaPageList> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Texto Titulo",
+                "Constas Fixas",
                 style: TextStyle(
                   color: Color(0xFF545454),
                   fontWeight: FontWeight.bold,
@@ -97,7 +97,7 @@ class _CategoriaPageListState extends State<CategoriaPageList> {
                 ),
               ),
               Text(
-                "Texto Descrição",
+                "Descrição da categoria...",
                 style: TextStyle(
                   color: Color(0xFF545454),
                   fontSize: 14,
